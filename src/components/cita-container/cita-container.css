@@ -1,0 +1,18 @@
+.cita-container {
+  border: 2px solid red;
+  display: flex;
+  flex-direction: row;
+}
+
+.cita-container-form {
+  border: 2px solid green;
+  padding: 20px;
+  width: 50%;
+  margin: 10px;
+}
+
+.cita-container-lista {
+  border: 2px solid blue;
+  width: 50%;
+  margin: 10px;
+}
