@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Nav from "react-bootstrap/Nav";
 import logo from "../../images/logo.png";
 import Button from "react-bootstrap/Button";
@@ -11,9 +10,11 @@ const Navbar = ({
   password,
   handleSubmit,
   error,
-  success,
-  isFormVisible,
+  showError,
+  showSuccess,
+  isLoginFormVisible,
   changeFormVisibility,
+  closeSession,
 }) => {
   return (
     <Nav
@@ -21,9 +22,9 @@ const Navbar = ({
       as="ul"
       className="bg-success px-3 py-3 d-flex justify-content-between"
     >
-      {error && (
+      {showError && (
         <div
-          className="alert alert-danger"
+          className="alert alert-danger alert-appointment"
           role="alert"
           style={{
             position: "absolute",
@@ -36,7 +37,7 @@ const Navbar = ({
           Usuario o password incorrectos!
         </div>
       )}
-      {success && (
+      {showSuccess && (
         <div
           className="alert alert-success"
           role="alert"
@@ -51,32 +52,30 @@ const Navbar = ({
           Login exitoso!
         </div>
       )}
-
       <Nav.Item as="div" className="d-flex align-items-center">
         <Nav.Item as="li">
-          <Nav.Link className="text-white" href="/home">
-            <img src={logo} />
+          <Nav.Link className="text-white" href="#">
+            <img src={logo} alt="Logo" />
           </Nav.Link>
         </Nav.Item>
 
         <Nav.Item as="li">
-          <Nav.Link className="text-white" href="/home">
+          <Nav.Link className="text-white" href="#">
             Inicio
           </Nav.Link>
         </Nav.Item>
         <Nav.Item as="li">
-          <Nav.Link className="text-white" eventKey="link-1">
+          <Nav.Link className="text-white" href="#">
             Acerca de
           </Nav.Link>
         </Nav.Item>
         <Nav.Item as="li">
-          <Nav.Link className="text-white" eventKey="link-2">
+          <Nav.Link className="text-white" href="#">
             Contacto
           </Nav.Link>
         </Nav.Item>
       </Nav.Item>
-
-      {!isFormVisible && (
+      {!isLoginFormVisible && !isLoggedIn && (
         <Nav.Item as="div" className="d-flex align-items-center">
           <Nav.Item as="li">
             <Nav.Link className="text-white" eventKey="link-2">
@@ -92,8 +91,7 @@ const Navbar = ({
           </Nav.Item>
         </Nav.Item>
       )}
-
-      {isFormVisible ? (
+      {isLoginFormVisible ? (
         <Nav.Item as="div" className="d-flex align-items-center">
           <Nav.Item as="li">
             <Nav.Link className="text-white" eventKey="link-2">
@@ -132,17 +130,20 @@ const Navbar = ({
           </Nav.Item>
         </Nav.Item>
       ) : (
-        !isFormVisible &&
+        !isLoginFormVisible &&
         isLoggedIn && (
           <Nav.Item as="div" className="d-flex align-items-center">
             <Nav.Item as="li">
-              <Nav.Link className="text-white" eventKey="link-2">
-                Bienvenido: <h1>{userName} </h1>
-              </Nav.Link>
+              <Nav.Item className="text-white" eventKey="link-2">
+                Bienvenido:{" "}
+                <span className="text-capitalize"> {userName} </span>
+              </Nav.Item>
             </Nav.Item>
             <Nav.Item as="li">
               <Nav.Link className="text-white" eventKey="link-2">
-                <Button variant="warning">Cerrar Sesión</Button>
+                <Button variant="warning" onClick={closeSession}>
+                  Cerrar Sesión
+                </Button>
               </Nav.Link>
             </Nav.Item>
           </Nav.Item>

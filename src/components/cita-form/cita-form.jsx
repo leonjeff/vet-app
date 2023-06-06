@@ -1,33 +1,81 @@
-const CitaForm = () => {
+const CitaForm = ({
+  petName,
+  petNameChange,
+  ownerName,
+  ownerNameChange,
+  date,
+  dateChange,
+  time,
+  timeChange,
+  symptoms,
+  symptomsChange,
+  addAppointment,
+}) => {
   return (
-    <form>
-      <div className="mb-3">
-        <label>Nombre Mascota</label>
-        <input />
-        <div id="emailHelp" className="form-text"></div>
-      </div>
-      <div className="mb-3">
-        <label>Nombre dueño</label>
-        <input type="text" />
-      </div>
-      <div className="mb-3 form-check">
-        <input type="date" className="form-check-input" id="exampleCheck1" />
-        <label className="form-check-label" for="exampleCheck1"></label>
-      </div>
-      <div className="mb-3 form-check">
-        <input type="time" className="form-check-input" id="exampleCheck1" />
-        <label className="form-check-label" for="exampleCheck1">
-          Check me out
-        </label>
-      </div>
-      <div>
-        <textarea />
-      </div>
+    <div className="rounded shadow p-3 mb-5 bg-body-tertiary ">
+      <h3 className="text-success">Añadir cita</h3>
+      <hr className="pb-3" />
+      <form>
+        <div className="mb-3">
+          <label className="form-label">Nombre Mascota</label>
+          <input
+            type="text"
+            className="form-control"
+            value={petName}
+            onChange={petNameChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Nombre dueño</label>
+          <input
+            type="text"
+            className="form-control"
+            value={ownerName}
+            onChange={ownerNameChange}
+          />
+        </div>
+        <div className="mb-3 row">
+          <div className="col">
+            <label className="form-label">Fecha</label>
+            <input
+              type="date"
+              className="form-control"
+              value={date}
+              onChange={dateChange}
+            />
+          </div>
+          <div className="col">
+            <label className="form-label">hora</label>
+            <input
+              type="time"
+              className="form-control"
+              value={time}
+              onChange={timeChange}
+            />
+          </div>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="textSymptomps" className="form-label">
+            Sintomas
+          </label>
+          <textarea
+            className="form-control"
+            id="textSymptomps"
+            rows="3"
+            onChange={symptomsChange}
+            value={symptoms}
+          ></textarea>
+        </div>
 
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
-    </form>
+        <button
+          type="submit"
+          className="btn btn-warning"
+          onClick={addAppointment}
+        >
+          Nueva cita
+        </button>
+      </form>
+    </div>
   );
 };
 

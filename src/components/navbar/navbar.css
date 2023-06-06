@@ -1,0 +1,7 @@
+.alert-appointment {
+  position: absolute;
+  width: 300px;
+  left: calc(50% - 150px);
+  text-align: center;
+  z-index: 9;
+}
