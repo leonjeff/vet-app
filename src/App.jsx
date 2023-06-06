@@ -9,7 +9,7 @@ import { Cita } from "./components/cita";
 import usersData from "./utils/users.json";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -75,18 +75,15 @@ function App() {
     setSymptoms(e.target.value);
   };
 
-  const [appointment, setAppointment] = useState([
-    {
-      petName,
-      ownerName,
-      date,
-      time,
-      symptoms,
-    },
-  ]);
+  const [appointment, setAppointment] = useState([]);
 
   const addAppointment = (e) => {
     e.preventDefault();
+
+    if (!petName || !ownerName || !date || !time || !symptoms) {
+      console.log("Please fill in all fields");
+      return;
+    }
 
     const newAppointment = {
       petName,
@@ -97,7 +94,6 @@ function App() {
     };
 
     setAppointment((prevAppointments) => [...prevAppointments, newAppointment]);
-
     setPetName("");
     setOwnerName("");
     setDate("");
@@ -175,7 +171,6 @@ function App() {
                     time={appointment.time}
                     symptoms={appointment.symptoms}
                     deleteAppointment={() => deleteAppointment(index)}
-
                   />
                 </li>
               );
